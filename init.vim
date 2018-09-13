@@ -47,16 +47,25 @@ noremap <Down> <nop>
 cmap <Up> <nop>
 cmap <Down> <nop>
 
-"移動設定 Colemak対応 hはQWERTYと同じ
+"Colemak対応 hはQWERTYと同じ
 
+"モーション
 noremap n j
 noremap N J
 noremap e k
-nnoremap i l
-nnoremap I L
+noremap E K
+noremap i l
+noremap I L
 
-noremap l i
-noremap L I
+noremap j e
+noremap J E
+
+"オペレータ
+noremap l o
+noremap L O
+
+noremap o i
+noremap O I
 
 noremap <C-w>n <C-w>j
 noremap <C-w>e <C-w>k
@@ -68,9 +77,6 @@ noremap <C-w>I <C-w>L
 
 nnoremap k n
 nnoremap K N
-
-noremap j e
-noremap J E
 
 "Defx用キーマップ
 autocmd FileType defx call s:defx_my_settings()
@@ -99,6 +105,8 @@ let mapleader = "\<Space>"
 
 noremap <leader>fi :vs<CR>:Defx<CR>
 noremap <leader>de :Denite file_rec<CR>
+noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
+noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 
 "qargs.vim 実践VIMより
 command! -nargs=0 -bar Qargs execute 'args' Quickfixfilenames()
