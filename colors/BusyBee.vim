@@ -4,7 +4,7 @@
 " Credits:      This is a modification of Mustang.vim color scheme
 
 set background=dark
-
+startreplace
 hi clear
 
 if exists("syntax_on")
