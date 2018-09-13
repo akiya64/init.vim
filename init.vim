@@ -1,4 +1,4 @@
-let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python37\python.exe'
+let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python37-32\python'
 
 set clipboard=unnamed
 
