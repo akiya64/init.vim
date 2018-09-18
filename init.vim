@@ -63,6 +63,7 @@ noremap J E
 "オペレータ
 noremap l o
 noremap L O
+noremap <c-l> <c-o>
 
 noremap o i
 noremap O I
@@ -103,7 +104,7 @@ endfunction
 "リーダー
 let mapleader = "\<Space>"
 
-noremap <leader>fi :vs<CR>:Defx<CR>
+noremap <leader>fi :Defx<CR>
 noremap <leader>de :Denite file_rec<CR>
 noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
 noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
