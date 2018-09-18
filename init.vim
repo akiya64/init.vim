@@ -25,7 +25,6 @@ set cursorline
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 set autoindent
 
 "マークダウン用ファイル設定
@@ -84,6 +83,8 @@ autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> i
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> <CR>
   \ defx#do_action('open')
   nnoremap <silent><buffer><expr> K
   \ defx#do_action('new_directory')
