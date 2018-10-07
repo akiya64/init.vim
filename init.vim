@@ -13,15 +13,12 @@ augroup END
 set binary noeol
 
 "タブ、行末、改行の可視設定
-set listchars=tab:»-,trail:¬,extends:»,precedes:«
+set listchars=tab:>\ ,trail:¬,extends:»,precedes:«
 set list
 
-"ハイライト設定 全角をエラーとする設定後に記載すること
-colorscheme Soifon
 set number
 set cursorline
 
-"タブの設定
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -30,11 +27,6 @@ set autoindent
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
-
-"キーアサイン
-noremap <C-l> :nohlsearch<CR><C-l>
-
-imap <S-Insert> <C-R>*
 
 "キーアサイン
 "矢印キー無効化
@@ -49,10 +41,10 @@ cmap <Down> <nop>
 "Colemak対応 hはQWERTYと同じ
 
 "モーション
-noremap n j
+noremap n gj
 noremap N J
-noremap e k
-noremap E K
+noremap e gk
+noremap E e
 noremap i l
 noremap I L
 
@@ -60,12 +52,11 @@ noremap j e
 noremap J E
 
 "オペレータ
-noremap l o
-noremap L O
-noremap <c-l> <c-o>
+noremap l i
+noremap L I
 
-noremap o i
-noremap O I
+"noremap o i
+"noremap O I
 
 noremap <C-w>n <C-w>j
 noremap <C-w>e <C-w>k
@@ -77,6 +68,81 @@ noremap <C-w>I <C-w>L
 
 nnoremap k n
 nnoremap K N
+
+"キーアサイン
+nnoremap <C-s> :w<CR>
+noremap <C-l> :nohlsearch<CR><C-l>
+
+noremap <C-p> :tabprevious<CR>
+noremap <C-n> :tabnext<CR>
+
+map <S-Insert> <C-R>*
+
+"リーダー
+let mapleader = "\<Space>"
+
+noremap <leader>fi :Defx<CR>
+noremap <leader>de :Denite file_rec<CR>
+noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
+noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
+
+"qargs.vim 実践VIMより
+command! -nargs=0 -bar Qargs execute 'args' Quickfixfilenames()
+function! Quickfixfilenames()
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+      let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
+"プラグイン
+
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+let s:dein_dir = expand('~\.cache\dein')
+
+" Required:
+if dein#load_state('C:\Users\akiya\.cache\dein')
+  call dein#begin('C:\Users\akiya\.cache\dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('C:\Users\akiya\.cache\dein\repos\github.com\Shougo\dein.vim')
+
+  call dein#load_toml( 'C:\Users\akiya\AppData\Local\nvim\dein.toml')
+
+  " Add or remove your plugins here like this:
+  "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add('Shougo/neosnippet-snippets')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
+
+if dein#check_install()
+    call dein#install()
+endif
+
+" プラグイン個別の設定
 
 "Defx用キーマップ
 autocmd FileType defx call s:defx_my_settings()
@@ -102,27 +168,8 @@ function! s:defx_my_settings() abort
   \ line('.') == 1 ? 'G' : 'k'
 endfunction
 
-"リーダー
-let mapleader = "\<Space>"
 
-noremap <leader>fi :Defx<CR>
-noremap <leader>de :Denite file_rec<CR>
-noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
-noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
-
-"qargs.vim 実践VIMより
-command! -nargs=0 -bar Qargs execute 'args' Quickfixfilenames()
-function! Quickfixfilenames()
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-      let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction
-
-"プラグイン設定
-" 読み込んだプラグインも含め、ファイルタイプの検出、ファイルタイプ別プラグイン/インデントを有効化する
-filetype plugin indent on
+let g:ale_completion_enabled = 1
 
 let g:deoplete#enable_at_startup = 1
 
