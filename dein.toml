@@ -1,0 +1,19 @@
+# [dein.toml]
+
+[[plugins]]
+repo = 'Shougo/defx.nvim.git'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim.git'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim.git'
+
+[[plugins]]
+repo = 'Itchyny/lightline.vim.git'
+
+[[plugins]]
+repo = 'Tpope/vim-fugitive.git'
+
+[[plugins]]
+repo = 'Editorconfig/editorconfig-vim.git'
