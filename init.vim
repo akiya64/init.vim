@@ -1,11 +1,13 @@
 let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python37-32\python'
 
+let s:init_vim_dir = expand('~/AppData/Local/nvim/')
+
 set clipboard=unnamed
 
 "全角文字など、エラーにしたい空白文字の設定
 augroup AdditionalHighlights
   autocmd!
-  autocmd ColorScheme * highlight link ZenkakuSpace Error
+   autocmd ColorScheme * highlight link ZenkakuSpace Error
   autocmd Syntax * syntax match ZenkakuSpace containedin=ALL /　/
 augroup END
 
@@ -27,6 +29,13 @@ set autoindent
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
+
+"phpではWordPressの関数辞書ファイルを読む
+autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/action-hooks.dict
+autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/classes.dict
+autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/filter-hooks.dict
+autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/functions.dict
+autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 
 "キーアサイン
 "矢印キー無効化
@@ -124,10 +133,6 @@ if dein#load_state('C:\Users\akiya\.cache\dein')
 
   call dein#load_toml( 'C:\Users\akiya\AppData\Local\nvim\dein.toml')
 
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
-
   " Required:
   call dein#end()
   call dein#save_state()
@@ -137,20 +142,16 @@ endif
 filetype plugin indent on
 syntax enable
 
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
 "End dein Scripts-------------------------
 
+" If you want to install not installed plugins on startup.
 if dein#check_install()
     call dein#install()
 endif
 
 " プラグイン個別の設定
 
-"Defx用キーマップ
+"Defx用キーマップ 変更が多いかもなのでこの位置
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
