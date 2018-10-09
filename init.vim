@@ -31,10 +31,10 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
 
 "phpではWordPressの関数辞書ファイルを読む
-autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/action-hooks.dict
-autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/classes.dict
-autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/filter-hooks.dict
-autocmd FileType php :setlocal dictionary+=~/AppData/Local/nvim/dictionary/wordpress/functions.dict
+autocmd FileType php :setlocal dictionary=~/AppData/Local/nvim/dictionary/wordpress/action-hooks.dict,
+\~/AppData/Local/nvim/dictionary/wordpress/classes.dict,
+\~/AppData/Local/nvim/dictionary/wordpress/filter-hooks.dict,
+\~/AppData/Local/nvim/dictionary/wordpress/functions.dict
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 
 "キーアサイン
