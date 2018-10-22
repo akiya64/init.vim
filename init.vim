@@ -91,15 +91,17 @@ map <S-Insert> <C-R>*
 let mapleader = "\<Space>"
 
 noremap <leader>fi :Defx<CR>
-noremap <leader>de :Denite file_rec<CR>
+noremap <leader>de :DeniteBufferDir -highlight-mode-insert=Search file_rec<CR>
 noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
 noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 
-" Set PowerShell as shell
-set shell=powershell.exe
-set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
-set shellpipe=|
-set shellredir=>
+"set Project dir
+noremap <leader>pr :cd %:h<CR>:pwd<CR>
+
+"set shell=powershell.exe
+"set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
+"set shellpipe=|
+"set shellredir=>
 
 "qargs.vim 実践VIMより
 command! -nargs=0 -bar Qargs execute 'args' Quickfixfilenames()

@@ -13,6 +13,11 @@ hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim.git'
+hook_add = '''
+call denite#custom#option('default', 'prompt', '>')
+call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<C-e>", '<denite:move_to_previous_line>')
+'''
 
 [[plugins]]
 repo = 'Tpope/vim-fugitive.git'
@@ -27,7 +32,8 @@ repo = 'cohama/lexima.vim'
 # linting
 [[plugins]]
 repo = 'w0rp/ale'
-hook_add = 'let g:ale_completion_enabled = 1'
+hook_add = '''
+'''
 
 [[plugins]]
 repo = 'Itchyny/lightline.vim.git'
@@ -36,7 +42,7 @@ let g:lightline = {
         \ 'colorscheme': 'wombat',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'], [ 'readonly' ] ],
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename',  'readonly' ] ,[ 'ale' ] ],
         \   'right': [ [ 'percent', 'lineinfo' ], [ 'filetype' ], [  'fileencoding', 'fileformat' ] ]
         \   },
         \ 'component_function': {
@@ -47,9 +53,17 @@ let g:lightline = {
         \   'fileformat': 'LightLineFileformat',
         \   'filetype': 'LightLineFiletype',
         \   'fileencoding': 'LightLineFileencoding',
-        \   'mode': 'LightLineMode'
+        \   'mode': 'LightLineMode',
+        \   'ale': 'AleSt'
         \   }
         \ }
+
+function! AleSt()
+  let l:count = ale#statusline#Count(bufnr(''))
+  let l:errors = l:count.error + l:count.style_error
+  let l:warnings = l:count.warning + l:count.style_warning
+  return l:count.total == 0 ? '' : 'E:' . l:errors . ' W:' . l:warnings
+endfunction
 
 function! LightLineModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
