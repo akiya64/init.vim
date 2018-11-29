@@ -33,6 +33,11 @@ repo = 'cohama/lexima.vim'
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
+let g:ale_fixers = {
+       \ 'css': [ 'stylelint' ],
+       \ 'scss': [ 'stylelint' ]
+       \}
+let g:ale_fix_on_save = 1
 '''
 
 [[plugins]]

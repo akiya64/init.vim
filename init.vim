@@ -26,6 +26,9 @@ set shiftwidth=4
 set softtabstop=4
 set autoindent
 
+set splitright
+set splitbelow
+
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
@@ -38,7 +41,6 @@ autocmd FileType php :setlocal dictionary=~/AppData/Local/nvim/dictionary/wordpr
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 
 "キーアサイン
-"矢印キー無効化
 noremap <Left> <nop>
 noremap <Right> <nop>
 noremap <Up> <nop>
@@ -61,8 +63,8 @@ noremap j e
 noremap J E
 
 "オペレータ
-noremap l i
-noremap L I
+noremap m i
+noremap M I
 
 "noremap o i
 "noremap O I
@@ -87,11 +89,14 @@ noremap <C-n> :tabnext<CR>
 
 map <S-Insert> <C-R>*
 
-"リーダー
+tnoremap <silent> <ESC> <C-\><C-n>
+
+"リーダー プラグインの呼び出しに使う
 let mapleader = "\<Space>"
 
-noremap <leader>fi :Defx<CR>
-noremap <leader>de :DeniteBufferDir -highlight-mode-insert=Search file_rec<CR>
+noremap <leader>fi :Defx -split=vertical<CR>
+noremap <leader>tr :Defx -split=vertical -winwidth=20 -direction=topleft<CR>
+noremap <leader>de :Denite -highlight-mode-insert=Search file_rec<CR>
 noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
 noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 
@@ -158,13 +163,15 @@ autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> i
-  \ defx#do_action('open')
+  \ defx#do_action('open', 'pedit')
   nnoremap <silent><buffer><expr> <CR>
-  \ defx#do_action('open')
+  \ defx#do_action('open', 'vsplit')
   nnoremap <silent><buffer><expr> K
   \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N
   \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> c
+  \ defx#do_action('rename')
   nnoremap <silent><buffer><expr> h
   \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> ~

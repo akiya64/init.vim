@@ -1,9 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='C:/Program Files/Neovim/share'
-let g:netrw_dirhist_2='C:/Program Files/Neovim/share/man'
-let g:netrw_dirhist_3='C:/Program Files/Neovim/share/man/man1'
-let g:netrw_dirhist_4='C:/Program Files/Neovim/share/man'
-let g:netrw_dirhist_5='C:/Program Files/Neovim/share/man/man1'
-let g:netrw_dirhist_6='C:/Program Files/Neovim/share/man'
-let g:netrw_dirhist_7='D:/awesome/wocker/data/venite/wp-content/themes/venite/component'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='C:/Users/akiya/phpcs/wpcs/WordPress-Core'
+let g:netrw_dirhist_2='D:/awesome/kakogawa_ds/wocker/data/kakogawa_ds/wp-content/themes/kakogawa_ds/scss'
+let g:netrw_dirhist_3='D:/awesome/kakogawa_ds/wocker/data/kakogawa_ds/wp-content/themes/kakogawa_ds/scss/layout'
+let g:netrw_dirhist_4='D:/awesome/kakogawa_ds/wocker/data/kakogawa_ds/wp-content/themes/kakogawa_ds/src/scss/layout'
