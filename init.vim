@@ -1,7 +1,5 @@
 let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python37-32\python'
 
-let s:init_vim_dir = expand('~/AppData/Local/nvim/')
-
 set clipboard=unnamed
 
 "全角文字など、エラーにしたい空白文字の設定
@@ -55,7 +53,7 @@ cmap <Down> <nop>
 noremap n gj
 noremap N J
 noremap e gk
-noremap E e
+noremap E K
 noremap i l
 noremap I L
 
@@ -63,8 +61,8 @@ noremap j e
 noremap J E
 
 "オペレータ
-noremap m i
-noremap M I
+noremap l i
+noremap L I
 
 "noremap o i
 "noremap O I
@@ -94,14 +92,36 @@ tnoremap <silent> <ESC> <C-\><C-n>
 "リーダー プラグインの呼び出しに使う
 let mapleader = "\<Space>"
 
-noremap <leader>fi :Defx -split=vertical<CR>
-noremap <leader>tr :Defx -split=vertical -winwidth=20 -direction=topleft<CR>
+noremap <leader>tr :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
+noremap <leader>fi :Defx<CR>
 noremap <leader>de :Denite -highlight-mode-insert=Search file_rec<CR>
 noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
 noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 
 "set Project dir
 noremap <leader>pr :cd %:h<CR>:pwd<CR>
+
+"session path
+let s:session_path = expand('~\.cache\sessions')
+
+if !isdirectory(s:session_path)
+    call mkdir(s:session_path, "p")
+endif
+" save session
+command! -nargs=1 SaveSession call s:saveSession(<f-args>)
+function! s:saveSession(file)
+    execute 'silent mksession!' s:session_path . '/' . a:file
+endfunction
+" load session
+command! -nargs=1 LoadSession call s:loadSession(<f-args>)
+function! s:loadSession(file)
+    execute 'silent source' s:session_path . '/' . a:file
+endfunction
+" delete session
+command! -nargs=1 DeleteSession call s:deleteSession(<f-args>)
+function! s:deleteSession(file)
+    call delete(expand(a:file))
+endfunction
 
 "set shell=powershell.exe
 "set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
@@ -163,21 +183,31 @@ autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> i
-  \ defx#do_action('open', 'pedit')
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> h
+  \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> <CR>
-  \ defx#do_action('open', 'vsplit')
+  \ defx#do_action('open')
   nnoremap <silent><buffer><expr> K
   \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N
   \ defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> c
+  nnoremap <silent><buffer><expr> r
   \ defx#do_action('rename')
-  nnoremap <silent><buffer><expr> h
-  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> m
+  \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> D
+  \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> c
+  \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> p
+  \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> .
+  \ defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> ~
   \ defx#do_action('cd')
   nnoremap <silent><buffer><expr> <Space>
-  \ defx#do_action('toggle_select') . 'j'
+  \ defx#do_action('toggle_select')
   nnoremap <silent><buffer><expr> j
   \ line('.') == line('$') ? 'gg' : 'j'
   nnoremap <silent><buffer><expr> k

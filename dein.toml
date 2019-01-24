@@ -12,6 +12,9 @@ repo = 'Shougo/deoplete.nvim.git'
 hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
 repo = 'Shougo/denite.nvim.git'
 hook_add = '''
 call denite#custom#option('default', 'prompt', '>')
