@@ -27,6 +27,10 @@ set autoindent
 set splitright
 set splitbelow
 
+filetype indent on
+"sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtab
+autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
+
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
@@ -101,6 +105,7 @@ noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 "set Project dir
 noremap <leader>pr :cd %:h<CR>:pwd<CR>
 
+"セッションの保存とロード ゴリラさんより
 "session path
 let s:session_path = expand('~\.cache\sessions')
 
@@ -123,10 +128,10 @@ function! s:deleteSession(file)
     call delete(expand(a:file))
 endfunction
 
-"set shell=powershell.exe
-"set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
-"set shellpipe=|
-"set shellredir=>
+set shell=powershell.exe
+set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
+set shellpipe=|
+set shellredir=>
 
 "qargs.vim 実践VIMより
 command! -nargs=0 -bar Qargs execute 'args' Quickfixfilenames()
@@ -176,18 +181,24 @@ if dein#check_install()
     call dein#install()
 endif
 
-" プラグイン個別の設定
+augroup filetypedetect
+    au BufRead,BufNewFile *.yml setfiletype ruby
+augroup END
+
+"プラグイン個別の設定
 
 "Defx用キーマップ 変更が多いかもなのでこの位置
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> i
-  \ defx#do_action('open')
+  \ defx#do_action('drop')
   nnoremap <silent><buffer><expr> h
   \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> o
+  \ defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> <CR>
-  \ defx#do_action('open')
+  \ defx#do_action('drop')
   nnoremap <silent><buffer><expr> K
   \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N
@@ -206,7 +217,7 @@ function! s:defx_my_settings() abort
   \ defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> ~
   \ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> <Space>
+  nnoremap <silent><buffer><expr> ,
   \ defx#do_action('toggle_select')
   nnoremap <silent><buffer><expr> j
   \ line('.') == line('$') ? 'gg' : 'j'
