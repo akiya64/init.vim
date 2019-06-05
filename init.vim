@@ -1,6 +1,14 @@
 let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python37-32\python'
 
+"@url POSIX互換関係の設定 http://tm.root-n.com/unix:command:git:operation:no_newline_at_end_of_file
+set binary noeol
+
 set clipboard=unnamed
+
+"set shell=powershell.exe
+"set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
+"set shellpipe=|
+"set shellredir=>
 
 "全角文字など、エラーにしたい空白文字の設定
 augroup AdditionalHighlights
@@ -8,9 +16,6 @@ augroup AdditionalHighlights
    autocmd ColorScheme * highlight link ZenkakuSpace Error
   autocmd Syntax * syntax match ZenkakuSpace containedin=ALL /　/
 augroup END
-
-"@url POSIX互換関係の設定 http://tm.root-n.com/unix:command:git:operation:no_newline_at_end_of_file
-set binary noeol
 
 "タブ、行末、改行の可視設定
 set listchars=tab:>\ ,trail:¬,extends:»,precedes:«
@@ -30,17 +35,12 @@ set splitbelow
 filetype indent on
 "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtab
 autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
+autocmd FileType javascript setlocal sw=4 sts=4 ts=4 et
 
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
 
-"phpではWordPressの関数辞書ファイルを読む
-autocmd FileType php :setlocal dictionary=~/AppData/Local/nvim/dictionary/wordpress/action-hooks.dict,
-\~/AppData/Local/nvim/dictionary/wordpress/classes.dict,
-\~/AppData/Local/nvim/dictionary/wordpress/filter-hooks.dict,
-\~/AppData/Local/nvim/dictionary/wordpress/functions.dict
-autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 
 "キーアサイン
 noremap <Left> <nop>
@@ -61,9 +61,6 @@ noremap E K
 noremap i l
 noremap I L
 
-noremap j e
-noremap J E
-
 "オペレータ
 noremap l i
 noremap L I
@@ -82,6 +79,9 @@ noremap <C-w>I <C-w>L
 nnoremap k n
 nnoremap K N
 
+nnoremap j e
+nnoremap J E
+
 "キーアサイン
 nnoremap <C-s> :w<CR>
 noremap <C-l> :nohlsearch<CR><C-l>
@@ -98,7 +98,6 @@ let mapleader = "\<Space>"
 
 noremap <leader>tr :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
 noremap <leader>fi :Defx<CR>
-noremap <leader>de :Denite -highlight-mode-insert=Search file_rec<CR>
 noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
 noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 
@@ -127,11 +126,6 @@ command! -nargs=1 DeleteSession call s:deleteSession(<f-args>)
 function! s:deleteSession(file)
     call delete(expand(a:file))
 endfunction
-
-set shell=powershell.exe
-set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
-set shellpipe=|
-set shellredir=>
 
 "qargs.vim 実践VIMより
 command! -nargs=0 -bar Qargs execute 'args' Quickfixfilenames()
@@ -181,6 +175,14 @@ if dein#check_install()
     call dein#install()
 endif
 
+function! s:deinClean()
+  if len(dein#check_clean())
+    call map(dein#check_clean(), 'delete(v:val, "rf")')
+  else
+    echo '[ERR] no disabled plugins'
+  endif
+endfunction
+
 augroup filetypedetect
     au BufRead,BufNewFile *.yml setfiletype ruby
 augroup END
@@ -192,16 +194,16 @@ autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> i
-  \ defx#do_action('drop')
+  \ defx#do_action('open')
   nnoremap <silent><buffer><expr> h
   \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> o
   \ defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> <CR>
   \ defx#do_action('drop')
-  nnoremap <silent><buffer><expr> K
+  nnoremap <silent><buffer><expr> k
   \ defx#do_action('new_directory')
-  nnoremap <silent><buffer><expr> N
+  nnoremap <silent><buffer><expr> K
   \ defx#do_action('new_file')
   nnoremap <silent><buffer><expr> r
   \ defx#do_action('rename')
@@ -221,6 +223,4 @@ function! s:defx_my_settings() abort
   \ defx#do_action('toggle_select')
   nnoremap <silent><buffer><expr> j
   \ line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k
-  \ line('.') == 1 ? 'G' : 'k'
 endfunction
