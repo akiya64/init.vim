@@ -11,7 +11,7 @@ repo = 'Shougo/defx.nvim'
 repo = 'Shougo/deoplete.nvim'
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
-autocmd FileType php :set dictionary=C:/Users/akiya/AppData/Local/nvim/dictionary/wordpress/functions.dict
+autocmd FileType php :set dictionary+=~/AppData/Local/nvim/dictionary/wordpress/functions.dict
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 '''
 
