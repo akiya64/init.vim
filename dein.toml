@@ -5,6 +5,9 @@ repo = 'akiya64/soifon'
 hook_add = 'colorscheme Soifon'
 
 [[plugins]]
+repo = 'nightsense/snow'
+
+[[plugins]]
 repo = 'Shougo/defx.nvim'
 
 [[plugins]]
@@ -42,7 +45,7 @@ repo = 'cohama/lexima.vim'
 repo = 'Itchyny/lightline.vim.git'
 hook_add = '''
 let g:lightline = {
-        \ 'colorscheme': 'wombat',
+        \ 'colorscheme': 'PaperColor',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename',  'readonly' ] ,[ 'ale' ] ],
