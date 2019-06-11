@@ -5,6 +5,7 @@ set binary noeol
 
 set clipboard=unnamed
 
+
 "set shell=powershell.exe
 "set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
 "set shellpipe=|
@@ -224,3 +225,6 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> j
   \ line('.') == line('$') ? 'gg' : 'j'
 endfunction
+
+"call deoplete#enable_logging('DEBUG', 'D:/deoplete.log')
+"call deoplete#custom#option('profile', v:true)
