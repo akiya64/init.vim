@@ -2,7 +2,10 @@
 
 [[plugins]]
 repo = 'akiya64/soifon'
-hook_add = 'colorscheme Soifon'
+hook_add = 'colorscheme soifon'
+
+[[plugins]]
+repo = 'nightsense/simplifysimplify'
 
 [[plugins]]
 repo = 'nightsense/snow'
@@ -11,12 +14,31 @@ repo = 'nightsense/snow'
 repo = 'Shougo/defx.nvim'
 
 [[plugins]]
+repo = 'Editorconfig/editorconfig-vim.git'
+
+# auto close brace
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
-autocmd FileType php :set dictionary+=~/AppData/Local/nvim/dictionary/wordpress/functions.dict
+autocmd FileType php :set dictionary=~/AppData/Local/nvim/dictionary/wordpress/functions.dict
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 '''
+
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-dictionary'
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'sudar/vim-wordpress-snippets'
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
@@ -33,13 +55,16 @@ call denite#custom#map('insert', "<C-e>", '<denite:move_to_previous_line>')
 repo = 'Tpope/vim-fugitive.git'
 
 [[plugins]]
-repo = 'Editorconfig/editorconfig-vim.git'
+repo = 'airblade/vim-gitgutter'
 
-# auto close brace
 [[plugins]]
-repo = 'cohama/lexima.vim'
+repo = 'kloppster/Wordpress-Vim-Syntax'
 
-# linting
+[[plugins]]
+repo = 'vim-syntastic/syntastic'
+
+[[plugins]]
+repo = 'joonty/vdebug'
 
 [[plugins]]
 repo = 'Itchyny/lightline.vim.git'
