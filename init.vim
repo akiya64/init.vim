@@ -5,6 +5,7 @@ set binary noeol
 
 set clipboard=unnamed
 
+set number
 
 "set shell=powershell.exe
 "set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
@@ -14,15 +15,18 @@ set clipboard=unnamed
 "全角文字など、エラーにしたい空白文字の設定
 augroup AdditionalHighlights
   autocmd!
-   autocmd ColorScheme * highlight link ZenkakuSpace Error
+  autocmd ColorScheme * highlight link ZenkakuSpace Error
   autocmd Syntax * syntax match ZenkakuSpace containedin=ALL /　/
 augroup END
+
+let g:deoplete#enable_at_startup = 1
+autocmd FileType php :set dictionary='C:/users/akiya/AppData/Local/nvim/dictionary/wordpress/functions.dict'
+autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 2)
 
 "タブ、行末、改行の可視設定
 set listchars=tab:>\ ,trail:¬,extends:»,precedes:«
 set list
 
-set number
 set cursorline
 
 set tabstop=4
@@ -42,6 +46,7 @@ autocmd FileType javascript setlocal sw=4 sts=4 ts=4 et
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
 
+autocmd ColorScheme * highlight LineNr ctermbg=1 guibg=#00000
 
 "キーアサイン
 noremap <Left> <nop>
@@ -188,11 +193,6 @@ augroup filetypedetect
     au BufRead,BufNewFile *.yml setfiletype ruby
 augroup END
 
-"プラグイン個別の設定
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 "Defx用キーマップ 変更が多いかもなのでこの位置
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
@@ -231,20 +231,3 @@ endfunction
 
 "call deoplete#enable_logging('DEBUG', 'D:/deoplete.log')
 "call deoplete#custom#option('profile', v:true)
-
-" ========Vdebug======== "
-let g:vdebug_options= {
-\    "port" : 9001,
-\    "timeout" : 20,
-\    "on_close" : 'detach',
-\    "break_on_open" : 0,
-\    "remote_path" : "",
-\    "local_path" : "",
-\    "debug_window_level" : 0,
-\    "debug_file_level" : 0,
-\    "debug_file" : "",
-\    "path_maps" : {
-\       '/home/bargee/data/kitahama-debug' : 'D:/kiteretz/wocker/data/kitahama-debug',
-\    },
-\    "window_arrangement" : ["DebuggerWatch", "DebuggerStack"]
-\}

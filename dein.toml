@@ -5,9 +5,6 @@ repo = 'akiya64/soifon'
 hook_add = 'colorscheme soifon'
 
 [[plugins]]
-repo = 'nightsense/simplifysimplify'
-
-[[plugins]]
 repo = 'nightsense/snow'
 
 [[plugins]]
@@ -23,22 +20,13 @@ repo = 'cohama/lexima.vim'
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_add = '''
-let g:deoplete#enable_at_startup = 1
-autocmd FileType php :set dictionary=~/AppData/Local/nvim/dictionary/wordpress/functions.dict
+autocmd FileType php :set dictionary=C:/users/akiya/AppData/Local/nvim/dictionary/wordpress/functions.dict
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
+let g:deoplete#enable_at_startup = 1
 '''
 
 [[plugins]]
 repo = 'deoplete-plugins/deoplete-dictionary'
-
-[[plugins]]
-repo = 'SirVer/ultisnips'
-
-[[plugins]]
-repo = 'honza/vim-snippets'
-
-[[plugins]]
-repo = 'sudar/vim-wordpress-snippets'
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
@@ -64,7 +52,30 @@ repo = 'kloppster/Wordpress-Vim-Syntax'
 repo = 'vim-syntastic/syntastic'
 
 [[plugins]]
+repo = 'gko/vim-coloresque'
+
+[[plugins]]
+repo = 'lilydjwg/colorizer'
+
+[[plugins]]
 repo = 'joonty/vdebug'
+hook_add='''
+let g:vdebug_options= {
+\    "port" : 9000,
+\    "server" : '',
+\    "timeout" : 20,
+\    "on_close" : 'detach',
+\    "break_on_open" : 1,
+\    "ide_key" : '',
+\    "debug_window_level" : 0,
+\    "debug_file_level" : 0,
+\    "debug_file" : "",
+\    "watch_window_style" : 'expanded',
+\    "marker_default" : '⬦',
+\    "marker_closed_tree" : '▸',
+\    "marker_open_tree" : '▾'
+\}
+'''
 
 [[plugins]]
 repo = 'Itchyny/lightline.vim.git'

@@ -1,3 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='D:/kiteretz/wocker/data/kitahama/wp-content/plugins/wp-post-branches'
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='C:/Users/akiya'
+let g:netrw_dirhist_4='C:/Users/akiya/.cache'
+let g:netrw_dirhist_3='C:/Users/akiya/.cache/dein'
+let g:netrw_dirhist_2='D:/'
+let g:netrw_dirhist_1='D:/kiteretz/wocker/data/nkgr/wp-content/.git'
