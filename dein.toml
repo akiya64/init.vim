@@ -81,7 +81,7 @@ let g:vdebug_options= {
 repo = 'Itchyny/lightline.vim.git'
 hook_add = '''
 let g:lightline = {
-        \ 'colorscheme': 'PaperColor',
+        \ 'colorscheme': 'ayu_light',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename',  'readonly' ] ,[ 'ale' ] ],

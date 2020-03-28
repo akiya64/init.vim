@@ -6,6 +6,7 @@ set binary noeol
 set clipboard=unnamed
 
 set number
+set bg=light
 
 "set shell=powershell.exe
 "set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
