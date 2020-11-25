@@ -50,12 +50,30 @@ repo = 'kloppster/Wordpress-Vim-Syntax'
 
 [[plugins]]
 repo = 'vim-syntastic/syntastic'
+hook_add='''
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+'''
 
 [[plugins]]
-repo = 'gko/vim-coloresque'
+repo= 'dense-analysis/ale'
+hook_add = '''
+let g:ale_linters = {
+\ 'css': ['stylelint'],
+\ 'javascript': ['eslint']
+\ }
+let g:ale_fixers = {
+\ 'javascript': ['eslint']
+\}
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+'''
 
 [[plugins]]
-repo = 'lilydjwg/colorizer'
+repo = 'yasukotelin/shirotelin'
 
 [[plugins]]
 repo = 'joonty/vdebug'
@@ -84,7 +102,7 @@ let g:lightline = {
         \ 'colorscheme': 'ayu_light',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename',  'readonly' ] ,[ 'ale' ] ],
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename',  'readonly' ] ],
         \   'right': [ [ 'percent', 'lineinfo' ], [ 'filetype' ], [  'fileencoding', 'fileformat' ] ]
         \   },
         \ 'component_function': {
@@ -96,7 +114,6 @@ let g:lightline = {
         \   'filetype': 'LightLineFiletype',
         \   'fileencoding': 'LightLineFileencoding',
         \   'mode': 'LightLineMode',
-        \   'ale': 'AleSt'
         \   }
         \ }
 

@@ -41,7 +41,7 @@ set splitbelow
 filetype indent on
 "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtab
 autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
-autocmd FileType javascript setlocal sw=4 sts=4 ts=4 et
+"autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
 
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
@@ -89,7 +89,7 @@ nnoremap K N
 noremap j e
 noremap J E
 
-"キーアサイン
+"コマンドのエイリアス
 nnoremap <C-s> :w<CR>
 noremap <C-l> :nohlsearch<CR><C-l>
 
