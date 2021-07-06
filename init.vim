@@ -28,12 +28,17 @@ autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_len
 set listchars=tab:>\ ,trail:¬,extends:»,precedes:«
 set list
 
-set cursorline
-
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set autoindent
+set smartindent
+
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.js setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd BufNewFile,BufRead *.json setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+augroup END
 
 set splitright
 set splitbelow
@@ -46,8 +51,6 @@ autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
-
-autocmd ColorScheme * highlight LineNr ctermbg=1 guibg=#00000
 
 "キーアサイン
 noremap <Left> <nop>
@@ -111,6 +114,7 @@ noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
 "set Project dir
 noremap <leader>pr :cd %:h<CR>:pwd<CR>
 
+"
 "セッションの保存とロード ゴリラさんより
 "session path
 let s:session_path = expand('~\.cache\sessions')
@@ -154,7 +158,7 @@ endif
 " Required:
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-let s:dein_dir = expand('~\.cache\dein')
+let s:dein_dir = expand('C:\Users\akiya\.cache\dein')
 
 " Required:
 if dein#load_state('C:\Users\akiya\.cache\dein')
@@ -194,7 +198,7 @@ augroup filetypedetect
     au BufRead,BufNewFile *.yml setfiletype ruby
 augroup END
 
-"Defx用キーマップ 変更が多いかもなのでこの位置
+"Defx用キーマップ
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
