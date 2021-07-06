@@ -1,21 +1,33 @@
 # [dein.toml]
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
 
+#colors
 [[plugins]]
 repo = 'akiya64/soifon'
 hook_add = 'colorscheme soifon'
 
 [[plugins]]
+repo = 'chiendo97/intellij.vim'
+
+[[plugins]]
 repo = 'nightsense/snow'
+
+[[plugins]]
+repo = 'Editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+# auto close brace
+[[plugins]]
+repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'Shougo/defx.nvim'
 
 [[plugins]]
-repo = 'Editorconfig/editorconfig-vim.git'
-
-# auto close brace
-[[plugins]]
-repo = 'cohama/lexima.vim'
+repo = 'deoplete-plugins/deoplete-dictionary'
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
@@ -26,12 +38,6 @@ let g:deoplete#enable_at_startup = 1
 '''
 
 [[plugins]]
-repo = 'deoplete-plugins/deoplete-dictionary'
-
-[[plugins]]
-repo = 'mattn/emmet-vim'
-
-[[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
 call denite#custom#option('default', 'prompt', '>')
@@ -40,7 +46,7 @@ call denite#custom#map('insert', "<C-e>", '<denite:move_to_previous_line>')
 '''
 
 [[plugins]]
-repo = 'Tpope/vim-fugitive.git'
+repo = 'tpope/vim-fugitive.git'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -69,11 +75,8 @@ let g:ale_fixers = {
 \ 'javascript': ['eslint']
 \}
 let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_quickfix = 0
 '''
-
-[[plugins]]
-repo = 'yasukotelin/shirotelin'
 
 [[plugins]]
 repo = 'joonty/vdebug'
@@ -96,13 +99,22 @@ let g:vdebug_options= {
 '''
 
 [[plugins]]
-repo = 'Itchyny/lightline.vim.git'
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merged = 0
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+
+[[plugins]]
+repo = 'Itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
-        \ 'colorscheme': 'ayu_light',
+        \ 'colorscheme': 'one',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename',  'readonly' ] ],
+        \   'left': [ [ 'mode', 'paste' ], [ 'coc', 'fugitive', 'filename',  'readonly' ] ],
         \   'right': [ [ 'percent', 'lineinfo' ], [ 'filetype' ], [  'fileencoding', 'fileformat' ] ]
         \   },
         \ 'component_function': {
@@ -118,7 +130,7 @@ let g:lightline = {
         \ }
 
 function! LightLineModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! LightLineReadonly()
