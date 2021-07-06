@@ -1,12 +1,18 @@
-let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python37-32\python'
+let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python39\python'
 
 "@url POSIX互換関係の設定 http://tm.root-n.com/unix:command:git:operation:no_newline_at_end_of_file
 set binary noeol
 
+let $LANG='en_US.UTF-8'
+
 set clipboard=unnamed
 
 set number
+
 set bg=light
+
+"set verbosefile=~/vim.log
+"set verbose=10
 
 "set shell=powershell.exe
 "set shellcmdflag=-NoProfile\ -NoLogo\ -NonInteractive\ -Command
