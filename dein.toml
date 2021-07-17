@@ -17,6 +17,14 @@ repo = 'nightsense/snow'
 repo = 'Editorconfig/editorconfig-vim'
 
 [[plugins]]
+repo = 'tyru/eskk.vim'
+hook_add = '''
+let g:eskk#directory = "~/.config/eskk"
+let g:eskk#dictionary = { 'path': "~/.config/fcitx/user.dict", 'sorted': 1, 'encoding': 'euc-jp',}
+let g:eskk#large_dictionary = {'path': "~/.config/eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp',}
+'''
+
+[[plugins]]
 repo = 'mattn/emmet-vim'
 
 # auto close brace
@@ -101,10 +109,6 @@ let g:vdebug_options= {
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
-merged = 0
-
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
 merged = 0
 
 [[plugins]]

@@ -1,5 +1,3 @@
-let g:python3_host_prog = 'C:\Users\akiya\AppData\Local\Programs\Python\Python39\python'
-
 "@url POSIX互換関係の設定 http://tm.root-n.com/unix:command:git:operation:no_newline_at_end_of_file
 set binary noeol
 
@@ -9,6 +7,7 @@ set clipboard=unnamed
 
 set number
 
+set termguicolors
 set bg=light
 
 "set verbosefile=~/vim.log
@@ -27,7 +26,7 @@ augroup AdditionalHighlights
 augroup END
 
 let g:deoplete#enable_at_startup = 1
-autocmd FileType php :set dictionary='C:/users/akiya/AppData/Local/nvim/dictionary/wordpress/functions.dict'
+autocmd FileType php :set dictionary='/.config/nvim/dictionary/wordpress/functions.dict'
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 2)
 
 "タブ、行末、改行の可視設定
@@ -114,8 +113,8 @@ let mapleader = "\<Space>"
 
 noremap <leader>tr :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
 noremap <leader>fi :Defx<CR>
-noremap <leader>so :so ~/AppData/Local/nvim/init.vim<CR>
-noremap <leader>es :e ~/AppData/Local/nvim/init.vim<CR>
+noremap <leader>so :so ~/.config/nvim/init.vim<CR>
+noremap <leader>es :e ~/.config/nvim/init.vim<CR>
 
 "set Project dir
 noremap <leader>pr :cd %:h<CR>:pwd<CR>
@@ -123,7 +122,7 @@ noremap <leader>pr :cd %:h<CR>:pwd<CR>
 "
 "セッションの保存とロード ゴリラさんより
 "session path
-let s:session_path = expand('~\.cache\sessions')
+let s:session_path = expand('~/.cache/sessions')
 
 if !isdirectory(s:session_path)
     call mkdir(s:session_path, "p")
@@ -156,36 +155,39 @@ endfunction
 
 "プラグイン
 
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-let s:dein_dir = expand('C:\Users\akiya\.cache\dein')
+set runtimepath+=/home/akiya/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('C:\Users\akiya\.cache\dein')
-  call dein#begin('C:\Users\akiya\.cache\dein')
+call dein#begin('/home/akiya/.cache/dein')
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('C:\Users\akiya\.cache\dein\repos\github.com\Shougo\dein.vim')
+" Let dein manage dein
+" Required:
+call dein#add('/home/akiya/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  call dein#load_toml( 'C:\Users\akiya\AppData\Local\nvim\dein.toml')
+" Add or remove your plugins here like this:
+call dein#load_toml( '/home/akiya/.config/nvim/dein.toml')
 
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+" Required:
+call dein#end()
 
 " Required:
 filetype plugin indent on
 syntax enable
 
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
 "End dein Scripts-------------------------
+
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
@@ -280,19 +282,9 @@ nmap <silent> gr <Plug>(coc-references)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = {
-      'lua',
-      'ruby',
-      'toml',
-      'vim',
-    }
-  }
-}
-EOF
+if $NVM_BIN != ""
+  let g:coc_node_path = '$NVM_BIN/node'
+endif
 
 "call deoplete#enable_logging('DEBUG', 'D:/deoplete.log')
 "call deoplete#custom#option('profile', v:true)
