@@ -7,6 +7,8 @@ let $LANG='en_US.UTF-8'
 
 set clipboard=unnamed
 
+set completeslash=slash
+
 set number
 
 set bg=light
@@ -26,7 +28,7 @@ augroup AdditionalHighlights
   autocmd Syntax * syntax match ZenkakuSpace containedin=ALL /　/
 augroup END
 
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 autocmd FileType php :set dictionary='C:/users/akiya/AppData/Local/nvim/dictionary/wordpress/functions.dict'
 autocmd FileType php :call deoplete#custom#source('dictionary', 'min_pattern_length', 2)
 
@@ -40,23 +42,25 @@ set softtabstop=4
 set autoindent
 set smartindent
 
+filetype indent on
 augroup fileTypeIndent
     autocmd!
     autocmd BufNewFile,BufRead *.js setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd BufNewFile,BufRead *.yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     autocmd BufNewFile,BufRead *.json setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd BufNewFile,BufRead *.tf setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 augroup END
 
 set splitright
 set splitbelow
 
-filetype indent on
-"sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtab
-autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
-"autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
-
 "マークダウン用ファイル設定
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md hi Constant guifg=#fffe89
+
+"レジスタ
+nnoremap x "_x
+nnoremap X "_X
 
 "キーアサイン
 noremap <Left> <nop>
@@ -70,16 +74,24 @@ cmap <Down> <nop>
 "Colemak対応 hはQWERTYと同じ
 
 "モーション
-noremap n gj
 noremap N J
-noremap e gk
+noremap n gj
 noremap E K
+noremap e gk
 noremap i l
 noremap I L
 
 "オペレータ
 noremap l i
 noremap L I
+
+nnoremap k n
+nnoremap K N
+
+noremap j e
+noremap J E
+
+noremap W <C-Left>
 
 "noremap o i
 "noremap O I
@@ -91,12 +103,6 @@ noremap <C-w>i <C-w>l
 noremap <C-w>N <C-w>J
 noremap <C-w>E <C-w>K
 noremap <C-w>I <C-w>L
-
-nnoremap k n
-nnoremap K N
-
-noremap j e
-noremap J E
 
 "コマンドのエイリアス
 nnoremap <C-s> :w<CR>
@@ -216,9 +222,9 @@ function! s:defx_my_settings() abort
   \ defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> <CR>
   \ defx#do_action('drop')
-  nnoremap <silent><buffer><expr> k
-  \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> K
+  \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> k
   \ defx#do_action('new_file')
   nnoremap <silent><buffer><expr> r
   \ defx#do_action('rename')
@@ -280,19 +286,8 @@ nmap <silent> gr <Plug>(coc-references)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = {
-      'lua',
-      'ruby',
-      'toml',
-      'vim',
-    }
-  }
-}
-EOF
+"Message
+:nnoremap <Leader>m :let @+ =execute('1messages')<CR>:echo 'last messages copied!'<CR>
 
 "call deoplete#enable_logging('DEBUG', 'D:/deoplete.log')
 "call deoplete#custom#option('profile', v:true)
